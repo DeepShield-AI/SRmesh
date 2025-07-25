@@ -1,0 +1,70 @@
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+!go.mod
+
+*.ll
+cscope*
+tags
+
+server/test/*
+server/server
+server/client
+
+paper_plot/plot/topo2*
+paper_plot/color.py
+paper_plot/test.py
+paper_plot/plot/*.pdf
+paper_plot/test_infer_back.ipynb
+
+conf/partition*
+conf/topo3.json

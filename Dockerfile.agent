@@ -1,0 +1,63 @@
+FROM ubuntu:22.04
+SHELL ["/bin/bash", "-c"]
+
+RUN sed -i 's/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list && \
+    apt update && \
+    DEBIAN_FRONTEND=noninteractive apt install -y zip bison build-essential cmake flex git curl libedit-dev wget \
+    libllvm12 llvm-12-dev libclang-12-dev python3 python3-pip python3-setuptools zlib1g-dev libelf-dev libfl-dev gnupg lsb-release\
+    bpfcc-tools libelf-dev libpcap-dev gcc-multilib build-essential iputils-ping linux-tools-$(uname -r) clang \
+    liblzma-dev arping netperf iperf luajit libluajit-5.1-dev kmod tcpdump libbpf-dev && \
+    ln -sf /usr/bin/llc-12 /usr/bin/llc && \
+    pip3 install scapy && \
+    export LLVM_ROOT="/usr/lib/llvm-12" && \
+
+    curl -s https://deb.frrouting.org/frr/keys.asc | apt-key add - && \
+    echo deb https://deb.frrouting.org/frr $(lsb_release -sc) frr-stable | tee -a /etc/apt/sources.list.d/frr.list && \
+    apt update && \
+    apt install -y frr frr-pythontools && \
+
+    wget https://go.dev/dl/go1.21.0.linux-amd64.tar.gz && \
+    tar -C /usr/local -xzf go1.21.0.linux-amd64.tar.gz && \
+    rm go1.21.0.linux-amd64.tar.gz
+
+ENV PATH="/usr/local/go/bin:${PATH}"
+
+RUN go env -w GOPROXY=https://goproxy.cn,direct
+
+WORKDIR /app
+COPY ../agent/http/go.mod ../agent/http/go.sum /app/agent/http/
+RUN cd /app/agent/http && \
+    go mod download && \
+    go mod tidy
+
+COPY ../agent/bcc_container /app/agent/bcc/
+RUN cd agent/bcc/build && \
+    make install && \
+    pushd src/python/ && \
+    make install && \
+    sed -i 's/bgpd=no/bgpd=yes/g' /etc/frr/daemons && \
+    sed -i 's/ospfd=no/ospfd=yes/g' /etc/frr/daemons && \
+    sed -i 's/ospf6d=no/ospf6d=yes/g' /etc/frr/daemons && \
+    sed -i 's/isisd=no/isisd=yes/g' /etc/frr/daemons && \
+    sed -i 's/bfdd=no/bfdd=yes/g' /etc/frr/daemons && \
+    sed -i 's/pathd=no/pathd=yes/g' /etc/frr/daemons
+
+COPY ../agent /app/agent
+# RUN rm -rf agent/bcc_container && \
+#     rm -rf agent/bcc/build && \
+#     mkdir -p agent/bcc/build && \
+#     cd agent/bcc/build && \
+#     cmake .. && \
+#     make && \
+#     make install && \
+#     cmake -DPYTHON_CMD=python3 ..  && \
+#     pushd src/python/ && \
+#     make && \
+#     make install
+RUN cd /app/agent/http && \
+    rm -rf http_service && \
+    go build -o http_service http.go client.go
+    
+EXPOSE 8889
+
+CMD ["bash", "/app/agent/make.sh"]

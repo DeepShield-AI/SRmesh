@@ -1,0 +1,332 @@
+version: '3.8'
+
+services:
+  controller:
+    image: frr-go-controller
+    container_name: controller
+    ports:
+      - "50051:50051"
+    privileged: true
+    volumes:
+      - ./sh:/app/sh
+    healthcheck:
+      test: ["CMD-SHELL", "ss -tnlp | grep 50051"]
+      interval: 5s
+      timeout: 600s
+      retries: 120
+    networks:
+      selfcontrolbr:
+        ipv4_address: 10.0.7.2
+        ipv6_address: fc00:0000:7::2
+      controlbr-0:
+      controlbr-1:
+      controlbr-2:
+      controlbr-3:
+      controlbr-4:
+      controlbr-5:
+    command: ["bash", "controller/start.sh"]
+
+  point-1:
+    image: frr-go
+    container_name: Wulumuqi
+    environment:
+      - PROC_NAME=point-001
+    ports:
+      - "8800:8889"
+    privileged: true
+    volumes:
+      - /lib/modules:/lib/modules:ro
+      - /usr/src:/usr/src:ro
+      - /sys/kernel/debug:/sys/kernel/debug
+      - ./sh:/app/sh
+    depends_on:
+      controller:
+        condition: service_healthy
+    networks:
+      selfbr-0:
+        ipv4_address: 10.1.1.2
+        ipv6_address: fc00:0001:1::2
+      controlbr-0:
+      br-0:
+      br-1:
+    command: ["bash", "/app/agent/start.sh", "point-1"]
+
+  point-2:
+    image: frr-go
+    container_name: Beihang
+    environment:
+      - PROC_NAME=point-002
+    ports:
+      - "8801:8889"
+    privileged: true
+    volumes:
+      - /lib/modules:/lib/modules:ro
+      - /usr/src:/usr/src:ro
+      - /sys/kernel/debug:/sys/kernel/debug
+      - ./sh:/app/sh
+    depends_on:
+      controller:
+        condition: service_healthy
+    networks:
+      selfbr-1:
+        ipv4_address: 10.1.2.2
+        ipv6_address: fc00:0001:2::2
+      controlbr-1:
+      br-0:
+      br-2:
+    command: ["bash", "/app/agent/start.sh", "point-2"]
+
+  point-3:
+    image: frr-go
+    container_name: Beida
+    environment:
+      - PROC_NAME=point-003
+    ports:
+      - "8802:8889"
+    privileged: true
+    volumes:
+      - /lib/modules:/lib/modules:ro
+      - /usr/src:/usr/src:ro
+      - /sys/kernel/debug:/sys/kernel/debug
+      - ./sh:/app/sh
+    depends_on:
+      controller:
+        condition: service_healthy
+    networks:
+      selfbr-2:
+        ipv4_address: 10.1.3.2
+        ipv6_address: fc00:0001:3::2
+      controlbr-2:
+      br-1:
+      br-3:
+    command: ["bash", "/app/agent/start.sh", "point-3"]
+
+  point-4:
+    image: frr-go
+    container_name: Beiyou
+    environment:
+      - PROC_NAME=point-004
+    ports:
+      - "8803:8889"
+    privileged: true
+    volumes:
+      - /lib/modules:/lib/modules:ro
+      - /usr/src:/usr/src:ro
+      - /sys/kernel/debug:/sys/kernel/debug
+      - ./sh:/app/sh
+    depends_on:
+      controller:
+        condition: service_healthy
+    networks:
+      selfbr-3:
+        ipv4_address: 10.1.4.2
+        ipv6_address: fc00:0001:4::2
+      controlbr-3:
+      br-2:
+      br-3:
+      br-4:
+    command: ["bash", "/app/agent/start.sh", "point-4"]
+
+  point-5:
+    image: frr-go
+    container_name: Shenyang
+    environment:
+      - PROC_NAME=point-005
+    ports:
+      - "8804:8889"
+    privileged: true
+    volumes:
+      - /lib/modules:/lib/modules:ro
+      - /usr/src:/usr/src:ro
+      - /sys/kernel/debug:/sys/kernel/debug
+      - ./sh:/app/sh
+    depends_on:
+      controller:
+        condition: service_healthy
+    networks:
+      selfbr-4:
+        ipv4_address: 10.1.5.2
+        ipv6_address: fc00:0001:5::2
+      controlbr-4:
+      br-4:
+      br-5:
+    command: ["bash", "/app/agent/start.sh", "point-5"]
+
+  point-6:
+    image: frr-go
+    container_name: Haerbin
+    environment:
+      - PROC_NAME=point-006
+    ports:
+      - "8805:8889"
+    privileged: true
+    volumes:
+      - /lib/modules:/lib/modules:ro
+      - /usr/src:/usr/src:ro
+      - /sys/kernel/debug:/sys/kernel/debug
+      - ./sh:/app/sh
+    depends_on:
+      controller:
+        condition: service_healthy
+    networks:
+      selfbr-5:
+        ipv4_address: 10.1.6.2
+        ipv6_address: fc00:0001:6::2
+      controlbr-5:
+      br-5:
+    command: ["bash", "/app/agent/start.sh", "point-6"]
+
+networks:
+
+  selfbr-0:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+      - subnet: 10.1.1.0/24
+      - subnet: fc00:0001:1::/64
+
+  selfbr-1:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+      - subnet: 10.1.2.0/24
+      - subnet: fc00:0001:2::/64
+
+  selfbr-2:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+      - subnet: 10.1.3.0/24
+      - subnet: fc00:0001:3::/64
+
+  selfbr-3:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+      - subnet: 10.1.4.0/24
+      - subnet: fc00:0001:4::/64
+
+  selfbr-4:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+      - subnet: 10.1.5.0/24
+      - subnet: fc00:0001:5::/64
+
+  selfbr-5:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+      - subnet: 10.1.6.0/24
+      - subnet: fc00:0001:6::/64
+
+  selfcontrolbr:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+      - subnet: 10.0.7.0/24
+      - subnet: fc00:0000:7::/64
+
+  br-0:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+      - subnet: 192.168.1.0/24
+      - subnet: fd00:1::/64
+
+  br-1:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+      - subnet: 192.168.2.0/24
+      - subnet: fd00:2::/64
+
+  br-2:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+      - subnet: 192.168.3.0/24
+      - subnet: fd00:3::/64
+
+  br-3:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+      - subnet: 192.168.4.0/24
+      - subnet: fd00:4::/64
+
+  br-4:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+      - subnet: 192.168.5.0/24
+      - subnet: fd00:5::/64
+
+  br-5:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+      - subnet: 192.168.6.0/24
+      - subnet: fd00:6::/64
+
+  controlbr-0:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+      - subnet: 10.2.1.0/24
+      - subnet: fc00:0002:1::/64
+
+  controlbr-1:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+      - subnet: 10.2.2.0/24
+      - subnet: fc00:0002:2::/64
+
+  controlbr-2:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+      - subnet: 10.2.3.0/24
+      - subnet: fc00:0002:3::/64
+
+  controlbr-3:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+      - subnet: 10.2.4.0/24
+      - subnet: fc00:0002:4::/64
+
+  controlbr-4:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+      - subnet: 10.2.5.0/24
+      - subnet: fc00:0002:5::/64
+
+  controlbr-5:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+      - subnet: 10.2.6.0/24
+      - subnet: fc00:0002:6::/64
+

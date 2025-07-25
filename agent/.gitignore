@@ -1,0 +1,94 @@
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+!go.mod
+
+*.ll
+cscope*
+tags
+
+zping
+zmesh
+zonemesh
+bcc/
+bcc_container
+
+conf/*.png
+conf/containers/point-[0-9]*.json
+conf/topo*
+
+*.db
+
+docker/sh/[A-Z]*.sh
+docker/*.sh
+docker/test/*.png
+docker/test/*.csv
+
+*.log
+
+http/http
+http/http_service
+http/run.sh
+http/*.json
+http/readSQL
+http/test*
+
+sender/*
+
+*copy*
+server/server
+server/client
+
+make.sh
+
+user_test
+test*

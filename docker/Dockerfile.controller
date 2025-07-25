@@ -1,0 +1,48 @@
+FROM ubuntu:22.04
+SHELL ["/bin/bash", "-c"]
+
+# 替换为清华镜像，加速 apt
+RUN sed -i 's/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list && \
+    apt update && \
+    DEBIAN_FRONTEND=noninteractive apt install -y zip bison build-essential cmake flex git curl libedit-dev wget \
+    libllvm12 llvm-12-dev libclang-12-dev python3 python3-setuptools zlib1g-dev libelf-dev libfl-dev gnupg lsb-release\
+    bpfcc-tools libelf-dev libpcap-dev gcc-multilib build-essential iputils-ping \
+    liblzma-dev arping netperf iperf luajit libluajit-5.1-dev kmod tcpdump net-tools && \
+    ln -sf /usr/bin/llc-12 /usr/bin/llc && \
+    export LLVM_ROOT="/usr/lib/llvm-12" && \
+    # 安装frr
+    curl -s https://deb.frrouting.org/frr/keys.asc | apt-key add - && \
+    echo deb https://deb.frrouting.org/frr $(lsb_release -sc) frr-stable | tee -a /etc/apt/sources.list.d/frr.list && \
+    apt update && \
+    apt install -y frr frr-pythontools && \
+    # 安装 Go
+    wget https://go.dev/dl/go1.21.0.linux-amd64.tar.gz && \
+    tar -C /usr/local -xzf go1.21.0.linux-amd64.tar.gz && \
+    rm go1.21.0.linux-amd64.tar.gz
+
+ENV PATH="/usr/local/go/bin:${PATH}"
+
+# 设置国内 Go 模块代理
+RUN go env -w GOPROXY=https://goproxy.cn,direct
+
+# 你的服务代码部分
+WORKDIR /app
+COPY ../controller/server/go.mod ../controller/server/go.sum /app/controller/server/
+RUN cd /app/controller/server && \
+    go mod download && \
+    go mod tidy && \
+    sed -i 's/bgpd=no/bgpd=yes/g' /etc/frr/daemons && \
+    sed -i 's/ospfd=no/ospfd=yes/g' /etc/frr/daemons && \
+    sed -i 's/ospf6d=no/ospf6d=yes/g' /etc/frr/daemons && \
+    sed -i 's/isisd=no/isisd=yes/g' /etc/frr/daemons && \
+    sed -i 's/bfdd=no/bfdd=yes/g' /etc/frr/daemons && \
+    sed -i 's/pathd=no/pathd=yes/g' /etc/frr/daemons
+
+COPY ../controller /app/controller
+RUN cd /app/controller/server && \
+    rm -rf server && \
+    go build -o server server.go
+    
+EXPOSE 50051
+# CMD 后面会被 docker compose 的指令覆盖
+CMD ["./controller/server/server"]

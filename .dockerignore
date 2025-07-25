@@ -1,0 +1,8 @@
+bcc
+database/*.db
+*.exe
+docker/*.py
+docker/test/
+http/test*
+*.ll
+*.o
