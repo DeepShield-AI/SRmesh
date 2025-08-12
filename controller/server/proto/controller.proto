@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package Controller;
+
+option go_package = "./proto_go;pb"; // Go 包路径，分号后是包名
+
+// 服务定义
+service TaskDistribution {
+  // 任务分发方法
+  rpc GetProbeDestinations (AgentGetTaskRequest) returns (ControllerTaskReply);
+}
+
+// 探测任务请求消息结构
+message AgentGetTaskRequest {
+  string AgentInfo = 1; // 探针信息
+}
+
+// 探测任务下发消息结构
+message ControllerTaskReply {
+  string Task = 1; // 任务的 JSON 字符串
+}
+
+// 服务定义
+service ProbeStatus {
+  // 探针上报方法
+  rpc ReportProbeStatus (AgentUploadReportRequest) returns (ControllerResponseReply);
+}
+
+// Agent报告上报请求消息结构
+message AgentUploadReportRequest {
+  string Report = 1; // 探针上报的状态信息
+}
+
+// Controller响应消息结构
+message ControllerResponseReply {
+  string Resonse = 1; // 响应结果
+}
+
+// 服务定义
+service ProbeData {
+  // 探针数据上报方法
+  rpc ReportProbeData (AgentUploadDataRequest) returns (ControllerResponseReply);
+}
+
+// Agent数据上报请求消息结构
+message AgentUploadDataRequest {
+  string Data = 1; // 探针上报的数据
+}

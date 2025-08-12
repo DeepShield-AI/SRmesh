@@ -13,8 +13,8 @@ Code for the paper "SRmesh: Deterministic and Efficient Diagnosis of Latency Bot
 
 | Month (2025)   | Task Description                                 | Status     |
 |----------------|--------------------------------------------------|------------|
-| Mid-August     | Core code implementation                         | ☐ To Do       |
-| September      | Frontend development                             | ☐ To Do     |
+| Mid-August     | Core code implementation                         | ✅ 90% Complete |
+| September      | Frontend development                             | 🚧 60% Complete |
 | October        | Provide necessary utility scripts                | ☐ To Do     |
 | December       | One-click deployment, testing, and optimization  | ☐ To Do     |
 
@@ -43,86 +43,7 @@ chmod +x run.sh
 docker compose up -d
 ```
 
-## 📋 Detailed Deployment Guide
 
-### Method 1: Docker Compose (Recommended)
-
-1. **Prepare the environment**
-   ```bash
-   # Navigate to the docker directory
-   cd docker
-   
-   # Make scripts executable
-   chmod +x run.sh
-   chmod +x sh/*.sh
-   ```
-
-2. **Build Docker images**
-   ```bash
-   # Generate configuration files
-   python3 build_yml.py
-   python3 containers_sh.py
-   python3 modify_conf.py
-   
-   # Build controller image
-   docker build -t frr-go-controller -f Dockerfile.controller ..
-   
-   # Build agent image
-   docker build -t frr-go -f Dockerfile.agent ..
-   ```
-
-3. **Deploy the system**
-   ```bash
-   # Start all services
-   docker compose up -d
-   
-   # Check service status
-   docker compose ps
-   ```
-
-4. **Verify deployment**
-   ```bash
-   # Check controller health
-   docker logs controller
-   
-   # Verify network connectivity
-   docker exec controller ss -tnlp | grep 50051
-   ```
-
-### Method 2: Manual Deployment
-
-#### Controller Deployment
-
-1. **Build controller**
-   ```bash
-   docker build -t frr-go-controller -f Dockerfile.controller .
-   ```
-
-2. **Run controller**
-   ```bash
-   docker run -d --name controller \
-     --privileged \
-     -p 50051:50051 \
-     -v ./docker/sh:/app/sh \
-     frr-go-controller
-   ```
-
-#### Agent Deployment
-
-1. **Build agent**
-   ```bash
-   docker build -t frr-go -f Dockerfile.agent .
-   ```
-
-2. **Deploy agents on network nodes**
-   ```bash
-   # Deploy on each network node
-   docker run -d --name agent-node-1 \
-     --privileged \
-     --network host \
-     -v /sys/fs/bpf:/sys/fs/bpf \
-     frr-go
-   ```
 
 ## 🔧 Configuration
 
@@ -214,68 +135,39 @@ docker exec controller tcpdump -i any -n
    docker exec controller ip route
    ```
 
-## 🧪 Testing
-
-### Basic Functionality Test
-
-```bash
-# Run system tests
-cd docker
-./test/run_tests.sh
-
-# Manual connectivity test
-docker exec controller ping6 fc00:0000:7::3
-```
-
-### Performance Benchmarking
-
-```bash
-# Network latency measurement
-docker exec point-1 ./sh/point-1.sh
-
-# Throughput testing
-docker exec controller iperf -s &
-docker exec point-1 iperf -c controller
-```
-
-## 🛠️ Development
-
-### Building from Source
-
-```bash
-# Clone and build
-git clone https://github.com/DeepShield-AI/SRmesh.git
-cd SRmesh
-
-# Build controller
-cd controller
-go build -o srmesh-controller
-
-# Build agent
-cd ../agent  
-go build -o srmesh-agent
-```
-
 ## 📚 Documentation
 
 - [Controller README](./controller/README.md) - Controller component documentation
 - [API Documentation](./docs/api.md) - API reference (coming soon)
 - [Architecture Guide](./docs/architecture.md) - System architecture details (coming soon)
 
-## ⚠️ System Requirements
 
-### Recommended Requirements  
-- CPU: 4+ cores
-- RAM: 8GB+
-- Disk: 20GB+ SSD
-- Network: 10Gbps+
+## 👥 Contributors
 
-
-## 📞 Support
-
-For questions and support:
-- GitHub Issues: [https://github.com/DeepShield-AI/SRmesh/issues](https://github.com/DeepShield-AI/SRmesh/issues)
+<table>
+  <tr>
+    </td>
+    <td align="center">
+      <a href="https://github.com/KenyonZhao233">
+        <img src="https://github.com/KenyonZhao233.png" width="100px;" alt="KenyonZhao233"/>
+        <br />
+        <sub><b>KenyonZhao233</b></sub>
+      </a>
+      <br />
+      <sub>Major Contributor</sub>
+    </td>
+    <td align="center">
+      <a href="https://github.com/tongy21">
+        <img src="https://github.com/tongy21.png" width="100px;" alt="tongy21"/>
+        <br />
+        <sub><b>tongy21</b></sub>
+      </a>
+      <br />
+      <sub>Major Contributor</sub>
+    </td>
+  </tr>
+</table>
 
 ## 🔗 Citation
 
-Comming soon.
+Coming soon.
