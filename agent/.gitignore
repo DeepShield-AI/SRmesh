@@ -75,13 +75,14 @@ docker/test/*.csv
 
 *.log
 
-http/http
-http/http_service
-http/run.sh
-http/*.json
-http/readSQL
-http/test*
 
+html/*
+database/*
+csv/*
+bin/*
+http/point-*
+http/logs/*
+http/conf/draw.py
 sender/*
 
 *copy*
@@ -92,3 +93,63 @@ make.sh
 
 user_test
 test*
+
+# Go specific
+vendor/
+go.sum
+*.mod.sum
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+dist/
+build/
+*.tar.gz
+*.zip
+
+# Runtime and temporary files
+*.pid
+*.lock
+*.tmp
+temp/
+tmp/
+
+# Network monitoring files
+*.pcap
+*.cap
+*.tcpdump
+
+# eBPF specific
+*.bpf.o
+*.bpf.c.o
+vmlinux.h
+.output/
+
+# Performance and profiling
+*.prof
+*.pprof
+perf.data*
+*.trace
+
+# Configuration backups
+*.conf.bak
+*.config.old
+
+# Certificate and key files
+*.pem
+*.key
+*.crt
+*.p12
+
+# Environment files
+.env
+.env.local
+.env.*.local
+

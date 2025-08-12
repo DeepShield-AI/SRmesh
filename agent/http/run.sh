@@ -1,0 +1,1 @@
+sudo go build -o http_service http.go client.go
