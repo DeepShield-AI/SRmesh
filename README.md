@@ -3,6 +3,7 @@ Code for the paper "SRmesh: Deterministic and Efficient Diagnosis of Latency Bot
 
 ### System Architecture
 
+- **Frontend**: Web-based user interface for visualization and interaction (see `./frontend/`)
 - **Controller**: Central orchestration component that manages the diagnosis process
 - **Agent**: Distributed monitoring agents deployed on network nodes
 - **Analyzer**: Data analysis component for processing network metrics
