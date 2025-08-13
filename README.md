@@ -135,11 +135,23 @@ docker exec controller tcpdump -i any -n
    docker exec controller ip route
    ```
 
+## 🧪 Algorithm Results
+
+<div align="center">
+  <img src="./simulation/plot/d3e1.png" width="22%" /> 
+  <img src="./simulation/plot/d3e2.png" width="22%" />
+  <img src="./simulation/plot/d3e3.png" width="22%" />
+  <img src="./simulation/plot/d3ea.png" width="22%" />
+</div>
+
+SRmesh achieves **up to 95% reduction** in probe traffic through three-step optimization while maintaining comprehensive network coverage. See [`./simulation/`](./simulation/) for detailed results.
+
 ## 📚 Documentation
 
 - [Controller README](./controller/README.md) - Controller component documentation
 - [API Documentation](./docs/api.md) - API reference (coming soon)
 - [Architecture Guide](./docs/architecture.md) - System architecture details (coming soon)
+
 
 
 ## 👥 Contributors
