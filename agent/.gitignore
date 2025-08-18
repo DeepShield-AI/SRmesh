@@ -63,8 +63,8 @@ bcc/
 bcc_container
 
 conf/*.png
-conf/containers/point-[0-9]*.json
-conf/topo*
+#conf/containers/point-[0-9]*.json
+#conf/topo*
 
 *.db
 
@@ -96,7 +96,7 @@ test*
 
 # Go specific
 vendor/
-go.sum
+#go.sum
 *.mod.sum
 
 # IDE and Editor files

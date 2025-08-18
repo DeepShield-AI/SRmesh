@@ -1,0 +1,479 @@
+{
+	"Addr": "10.1.13.2",
+	"Addr6": "fc00:0001:d::2",
+	"Name": "太原",
+	"Destinations": [
+		"10.1.16.2",
+		"10.1.9.2",
+		"10.1.12.2",
+		"10.1.15.2"
+	],
+	"Destinations6": [
+		"",
+		"",
+		"",
+		""
+	],
+	"ControllerAddr": "10.1.17.2",
+	"ControllerAddr6": "fc00:0000:11::2",
+	"Port": 8889,
+	"Dscp": [
+		0,
+		10,
+		46
+	],
+	"PingConfig": {
+		"epoch": 3,
+		"count": 1,
+		"connections": 1,
+		"clean": true
+	},
+	"Policies": [],
+	"UseIPv6": false,
+	"Mode": {
+		"Endpoint": "",
+		"LastSuccTime": "",
+		"Status": "true",
+		"Type": "local"
+	},
+	"Base": {
+		"Archive": 10,
+		"Refresh": 1,
+		"Timeout": 5
+	},
+	"Topology": {
+		"Tline": "2",
+		"Tsound": "",
+		"Tsymbolsize": "60"
+	},
+	"Network": {
+		"10.1.1.2": {
+			"Name": "乌鲁木齐",
+			"Addr": "10.1.1.2",
+			"Addr6": "fc00:0001:1::2",
+			"Zonemesh": true,
+			"Ping": [],
+			"Topology": [
+				{
+					"Addr": "10.1.3.2",
+					"Addr6": "fc00:0001:3::2",
+					"Name": "北大",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				},
+				{
+					"Addr": "10.1.4.2",
+					"Addr6": "fc00:0001:4::2",
+					"Name": "北邮",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				},
+				{
+					"Addr": "10.1.5.2",
+					"Addr6": "fc00:0001:5::2",
+					"Name": "沈阳",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				},
+				{
+					"Addr": "10.1.6.2",
+					"Addr6": "fc00:0001:6::2",
+					"Name": "哈尔滨",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				}
+			]
+		},
+		"10.1.10.2": {
+			"Name": "大连",
+			"Addr": "10.1.10.2",
+			"Addr6": "fc00:0001:a::2",
+			"Zonemesh": true,
+			"Ping": [],
+			"Topology": [
+				{
+					"Addr": "10.1.13.2",
+					"Addr6": "fc00:0001:d::2",
+					"Name": "太原",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				},
+				{
+					"Addr": "10.1.15.2",
+					"Addr6": "fc00:0001:f::2",
+					"Name": "天津",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				}
+			]
+		},
+		"10.1.11.2": {
+			"Name": "拉萨",
+			"Addr": "10.1.11.2",
+			"Addr6": "fc00:0001:b::2",
+			"Zonemesh": true,
+			"Ping": [],
+			"Topology": [
+				{
+					"Addr": "10.1.12.2",
+					"Addr6": "fc00:0001:c::2",
+					"Name": "银川",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				},
+				{
+					"Addr": "10.1.13.2",
+					"Addr6": "fc00:0001:d::2",
+					"Name": "太原",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				},
+				{
+					"Addr": "10.1.14.2",
+					"Addr6": "fc00:0001:e::2",
+					"Name": "石家庄",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				},
+				{
+					"Addr": "10.1.15.2",
+					"Addr6": "fc00:0001:f::2",
+					"Name": "天津",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				}
+			]
+		},
+		"10.1.12.2": {
+			"Name": "银川",
+			"Addr": "10.1.12.2",
+			"Addr6": "fc00:0001:c::2",
+			"Zonemesh": true,
+			"Ping": [],
+			"Topology": [
+				{
+					"Addr": "10.1.14.2",
+					"Addr6": "fc00:0001:e::2",
+					"Name": "石家庄",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				}
+			]
+		},
+		"10.1.13.2": {
+			"Name": "太原",
+			"Addr": "10.1.13.2",
+			"Addr6": "fc00:0001:d::2",
+			"Zonemesh": true,
+			"Ping": [
+				{
+					"Addr": "10.1.16.2",
+					"Addr6": "",
+					"Name": "太原",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				},
+				{
+					"Addr": "10.1.9.2",
+					"Addr6": "",
+					"Name": "太原",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				},
+				{
+					"Addr": "10.1.12.2",
+					"Addr6": "",
+					"Name": "太原",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				},
+				{
+					"Addr": "10.1.15.2",
+					"Addr6": "",
+					"Name": "太原",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				}
+			],
+			"Topology": []
+		},
+		"10.1.14.2": {
+			"Name": "石家庄",
+			"Addr": "10.1.14.2",
+			"Addr6": "fc00:0001:e::2",
+			"Zonemesh": true,
+			"Ping": [],
+			"Topology": []
+		},
+		"10.1.15.2": {
+			"Name": "天津",
+			"Addr": "10.1.15.2",
+			"Addr6": "fc00:0001:f::2",
+			"Zonemesh": true,
+			"Ping": [],
+			"Topology": []
+		},
+		"10.1.16.2": {
+			"Name": "西宁",
+			"Addr": "10.1.16.2",
+			"Addr6": "fc00:0001:10::2",
+			"Zonemesh": true,
+			"Ping": [],
+			"Topology": []
+		},
+		"10.1.2.2": {
+			"Name": "北航",
+			"Addr": "10.1.2.2",
+			"Addr6": "fc00:0001:2::2",
+			"Zonemesh": true,
+			"Ping": [],
+			"Topology": [
+				{
+					"Addr": "10.1.3.2",
+					"Addr6": "fc00:0001:3::2",
+					"Name": "北大",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				},
+				{
+					"Addr": "10.1.5.2",
+					"Addr6": "fc00:0001:5::2",
+					"Name": "沈阳",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				},
+				{
+					"Addr": "10.1.8.2",
+					"Addr6": "fc00:0001:8::2",
+					"Name": "呼和浩特",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				}
+			]
+		},
+		"10.1.3.2": {
+			"Name": "北大",
+			"Addr": "10.1.3.2",
+			"Addr6": "fc00:0001:3::2",
+			"Zonemesh": true,
+			"Ping": [],
+			"Topology": [
+				{
+					"Addr": "10.1.5.2",
+					"Addr6": "fc00:0001:5::2",
+					"Name": "沈阳",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				},
+				{
+					"Addr": "10.1.6.2",
+					"Addr6": "fc00:0001:6::2",
+					"Name": "哈尔滨",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				},
+				{
+					"Addr": "10.1.7.2",
+					"Addr6": "fc00:0001:7::2",
+					"Name": "长春",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				}
+			]
+		},
+		"10.1.4.2": {
+			"Name": "北邮",
+			"Addr": "10.1.4.2",
+			"Addr6": "fc00:0001:4::2",
+			"Zonemesh": true,
+			"Ping": [],
+			"Topology": [
+				{
+					"Addr": "10.1.8.2",
+					"Addr6": "fc00:0001:8::2",
+					"Name": "呼和浩特",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				}
+			]
+		},
+		"10.1.5.2": {
+			"Name": "沈阳",
+			"Addr": "10.1.5.2",
+			"Addr6": "fc00:0001:5::2",
+			"Zonemesh": true,
+			"Ping": [],
+			"Topology": [
+				{
+					"Addr": "10.1.11.2",
+					"Addr6": "fc00:0001:b::2",
+					"Name": "拉萨",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				}
+			]
+		},
+		"10.1.6.2": {
+			"Name": "哈尔滨",
+			"Addr": "10.1.6.2",
+			"Addr6": "fc00:0001:6::2",
+			"Zonemesh": true,
+			"Ping": [],
+			"Topology": [
+				{
+					"Addr": "10.1.8.2",
+					"Addr6": "fc00:0001:8::2",
+					"Name": "呼和浩特",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				},
+				{
+					"Addr": "10.1.12.2",
+					"Addr6": "fc00:0001:c::2",
+					"Name": "银川",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				}
+			]
+		},
+		"10.1.7.2": {
+			"Name": "长春",
+			"Addr": "10.1.7.2",
+			"Addr6": "fc00:0001:7::2",
+			"Zonemesh": true,
+			"Ping": [],
+			"Topology": [
+				{
+					"Addr": "10.1.8.2",
+					"Addr6": "fc00:0001:8::2",
+					"Name": "呼和浩特",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				},
+				{
+					"Addr": "10.1.12.2",
+					"Addr6": "fc00:0001:c::2",
+					"Name": "银川",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				}
+			]
+		},
+		"10.1.8.2": {
+			"Name": "呼和浩特",
+			"Addr": "10.1.8.2",
+			"Addr6": "fc00:0001:8::2",
+			"Zonemesh": true,
+			"Ping": [],
+			"Topology": []
+		},
+		"10.1.9.2": {
+			"Name": "北京",
+			"Addr": "10.1.9.2",
+			"Addr6": "fc00:0001:9::2",
+			"Zonemesh": true,
+			"Ping": [],
+			"Topology": [
+				{
+					"Addr": "10.1.10.2",
+					"Addr6": "fc00:0001:a::2",
+					"Name": "大连",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				},
+				{
+					"Addr": "10.1.11.2",
+					"Addr6": "fc00:0001:b::2",
+					"Name": "拉萨",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				},
+				{
+					"Addr": "10.1.12.2",
+					"Addr6": "fc00:0001:c::2",
+					"Name": "银川",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				},
+				{
+					"Addr": "10.1.16.2",
+					"Addr6": "fc00:0001:10::2",
+					"Name": "西宁",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				},
+				{
+					"Addr": "10.1.15.2",
+					"Addr6": "fc00:0001:f::2",
+					"Name": "天津",
+					"Thdavgdelay": "200",
+					"Thdchecksec": "900",
+					"Thdloss": "30",
+					"Thdoccnum": "3"
+				}
+			]
+		}
+	}
+}
