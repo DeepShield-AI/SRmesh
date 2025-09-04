@@ -13,10 +13,10 @@ Code for the paper "SRmesh: Deterministic and Efficient Diagnosis of Latency Bot
 
 | Month (2025)   | Task Description                                 | Status     |
 |----------------|--------------------------------------------------|------------|
-| Mid-August     | Core code implementation                         | ✅ 90% Complete |
-| September      | Frontend development                             | 🚧 60% Complete |
-| October        | Provide necessary utility scripts                | ☐ To Do     |
-| December       | One-click deployment, testing, and optimization  | ☐ To Do     |
+| Mid-August     | Core code implementation                         | ✅ 95% Complete |
+| September      | Frontend development                             | ✅ 90% Complete |
+| October        | Provide necessary utility scripts                | 🚧 80% Complete     |
+| December       | One-click deployment, testing, and optimization  | 🚧 50% Complete     |
 
 ## 🚀 Quick Start
 
@@ -50,6 +50,7 @@ docker compose up -d
 ### Network Topology
 
 The system supports custom network topologies. Configure your topology in:
+
 - `docker/conf/topo.json` - Primary topology configuration
 - `docker/conf/topo2.json` - Alternative topology configuration
 
@@ -77,6 +78,55 @@ Example topology configuration:
   ]
 }
 ```
+
+## 🚦 Automatic Delay Injection & Bottleneck Diagnosis
+
+SRmesh supports automatic injection of artificial delay (latency bottlenecks) for testing and diagnosis. This feature is integrated into the deployment and analysis workflow.
+
+### 1. Injecting Delay via `run.sh`
+
+You can specify delay injection for any container interface when starting the system:
+
+```bash
+cd docker
+# Syntax: ./run.sh --delay <container> <interface> [delay]
+./run.sh --delay Wulumuqi eth1 100ms
+# You can specify multiple --delay parameters in one command
+./run.sh --delay Wulumuqi eth1 100ms --delay Beihang eth2 200ms
+```
+
+This will automatically set the specified delay (default: 200ms if omitted) on the given container interface(s) after startup. All delay settings are applied before the system begins probing.
+
+### 2. Checking Delay Configuration
+
+To verify the current delay (netem) settings on all containers, use:
+
+```bash
+cd docker
+./check_delay.sh
+```
+
+This script will print the network interfaces and their delay rules for each running container, helping you confirm that artificial bottlenecks are in effect.
+
+### 3. Automated Bottleneck Diagnosis
+
+After running the system and collecting probe data, the analyzer will automatically diagnose and report bottleneck links:
+
+- The analyzer (`analyzer/analyzer.py`) is invoked automatically at the end of `run.sh` (on exit or Ctrl+C), or can be run manually:
+
+```bash
+cd analyzer
+python3 analyzer.py
+# Optionally specify a custom bottleneck threshold (ms):
+python3 analyzer.py 80
+```
+
+The analyzer will output:
+- Estimated per-link delays
+- Detected bottleneck links (with severity)
+- A summary report
+
+This workflow enables end-to-end testing of delay injection, verification, and diagnosis in SRmesh.
 
 ### Environment Variables
 
