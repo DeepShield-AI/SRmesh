@@ -1,13 +1,19 @@
-# SRmesh
-Code for the paper "SRmesh: Deterministic and Efficient Diagnosis of Latency Bottleneck Links in SRv6 Networks" in IEEE ICNP 2025
+<div align="center">
+  <h1>SRmesh</h1>
+  <p><em>Code for the paper "SRmesh: Deterministic and Efficient Diagnosis of Latency Bottleneck Links in SRv6 Networks" in IEEE ICNP 2025</em></p>
+</div>
 
-### System Architecture
+---
 
-- **Frontend**: Web-based user interface for visualization and interaction (see `./frontend/`)
-- **Controller**: Central orchestration component that manages the diagnosis process
-- **Agent**: Distributed monitoring agents deployed on network nodes
-- **Analyzer**: Data analysis component for processing network metrics
-- **Docker Infrastructure**: Containerized deployment for easy scalability
+## System Architecture
+
+| Component | Description |
+|-----------|-------------|
+| **Frontend** | Web-based user interface for visualization and interaction (see `./frontend/`) |
+| **Controller** | Central orchestration component that manages the diagnosis process |
+| **Agent** | Distributed monitoring agents deployed on network nodes |
+| **Analyzer** | Data analysis component for processing network metrics |
+| **Docker Infrastructure** | Containerized deployment for easy scalability |
 
 ## 🗓️ Project Timeline – 2025
 
@@ -15,17 +21,19 @@ Code for the paper "SRmesh: Deterministic and Efficient Diagnosis of Latency Bot
 |----------------|--------------------------------------------------|------------|
 | Mid-August     | Core code implementation                         | ✅ 95% Complete |
 | September      | Frontend development                             | ✅ 90% Complete |
-| October        | Provide necessary utility scripts                | 🚧 80% Complete     |
+| October        | Provide necessary utility scripts                | ✅ 90% Complete     |
 | December       | One-click deployment, testing, and optimization  | 🚧 50% Complete     |
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
-- Docker (version 20.10 or higher)
-- Docker Compose (version 2.0 or higher)
-- Linux environment with kernel version 5.4 or higher (recommended for eBPF support)
-- At least 8GB RAM and 20GB disk space
+| Requirement | Details |
+|-------------|---------|
+| Docker | Version 20.10 or higher |
+| Docker Compose | Version 2.0 or higher |
+| Linux environment | Kernel version 5.4 or higher (recommended for eBPF support) |
+| Resources | At least 8GB RAM and 20GB disk space |
 
 ### One-Click Deployment
 
@@ -43,13 +51,11 @@ chmod +x run.sh
 docker compose up -d
 ```
 
-
-
 ## 🔧 Configuration
 
 ### Network Topology
 
-The system supports custom network topologies. Configure your topology in:
+> The system supports custom network topologies. Configure your topology in:
 
 - `docker/conf/topo.json` - Primary topology configuration
 - `docker/conf/topo2.json` - Alternative topology configuration
@@ -83,7 +89,8 @@ Example topology configuration:
 
 SRmesh supports automatic injection of artificial delay (latency bottlenecks) for testing and diagnosis. This feature is integrated into the deployment and analysis workflow.
 
-### 1. Injecting Delay via `run.sh`
+<details>
+<summary><strong>Step 1: Inject Delay via <code>run.sh</code></strong></summary>
 
 You can specify delay injection for any container interface when starting the system:
 
@@ -97,7 +104,10 @@ cd docker
 
 This will automatically set the specified delay (default: 200ms if omitted) on the given container interface(s) after startup. All delay settings are applied before the system begins probing.
 
-### 2. Checking Delay Configuration
+</details>
+
+<details>
+<summary><strong>Step 2: Check Delay Configuration</strong></summary>
 
 To verify the current delay (netem) settings on all containers, use:
 
@@ -108,7 +118,10 @@ cd docker
 
 This script will print the network interfaces and their delay rules for each running container, helping you confirm that artificial bottlenecks are in effect.
 
-### 3. Automated Bottleneck Diagnosis
+</details>
+
+<details>
+<summary><strong>Step 3: Run Automated Bottleneck Diagnosis</strong></summary>
 
 After running the system and collecting probe data, the analyzer will automatically diagnose and report bottleneck links:
 
@@ -127,6 +140,8 @@ The analyzer will output:
 - A summary report
 
 This workflow enables end-to-end testing of delay injection, verification, and diagnosis in SRmesh.
+
+</details>
 
 ### Environment Variables
 
@@ -158,32 +173,44 @@ docker exec controller tcpdump -i any -n
 
 ### Common Issues
 
-1. **Port conflicts**
-   ```bash
-   # Check if port 50051 is in use
-   ss -tnlp | grep 50051
-   
-   # Kill conflicting processes if needed
-   sudo kill $(sudo lsof -t -i:50051)
-   ```
+<details>
+<summary><strong>1. Port conflicts</strong></summary>
 
-2. **eBPF program loading failures**
-   ```bash
-   # Ensure kernel version support
-   uname -r
-   
-   # Check BPF filesystem mount
-   mount | grep bpf
-   ```
+```bash
+# Check if port 50051 is in use
+ss -tnlp | grep 50051
 
-3. **Network connectivity issues**
-   ```bash
-   # Verify Docker networks
-   docker network ls
-   
-   # Check IP routing
-   docker exec controller ip route
-   ```
+# Kill conflicting processes if needed
+sudo kill $(sudo lsof -t -i:50051)
+```
+
+</details>
+
+<details>
+<summary><strong>2. eBPF program loading failures</strong></summary>
+
+```bash
+# Ensure kernel version support
+uname -r
+
+# Check BPF filesystem mount
+mount | grep bpf
+```
+
+</details>
+
+<details>
+<summary><strong>3. Network connectivity issues</strong></summary>
+
+```bash
+# Verify Docker networks
+docker network ls
+
+# Check IP routing
+docker exec controller ip route
+```
+
+</details>
 
 ## 🧪 Algorithm Results
 
@@ -198,17 +225,13 @@ SRmesh achieves **up to 95% reduction** in probe traffic through three-step opti
 
 ## 📚 Documentation
 
-- [Controller README](./controller/README.md) - Controller component documentation
-- [API Documentation](./docs/api.md) - API reference (coming soon)
-- [Architecture Guide](./docs/architecture.md) - System architecture details (coming soon)
-
+> - [Controller README](./controller/README.md) - Controller component documentation
 
 
 ## 👥 Contributors
 
 <table>
   <tr>
-    </td>
     <td align="center">
       <a href="https://github.com/KenyonZhao233">
         <img src="https://github.com/KenyonZhao233.png" width="100px;" alt="KenyonZhao233"/>
@@ -232,4 +255,13 @@ SRmesh achieves **up to 95% reduction** in probe traffic through three-step opti
 
 ## 🔗 Citation
 
-Coming soon.
+@INPROCEEDINGS{11192455,
+  author={Zhao, Kaiyang and Zhang, Han and Tong, Yao and Li, Yahui and Shi, Xingang and Wang, Zhiliang and Yin, Xia and Wu, Jianping},
+  booktitle={2025 IEEE 33rd International Conference on Network Protocols (ICNP)}, 
+  title={SRmesh: Deterministic and Efficient Diagnosis of Latency Bottleneck Links in SRv6 Networks}, 
+  year={2025},
+  volume={},
+  number={},
+  pages={1-12},
+  keywords={Accuracy;Uncertainty;Protocols;Network topology;Scalability;Redundancy;Prototypes;Transforms;Routing;Probes},
+  doi={10.1109/ICNP65844.2025.11192455}}
