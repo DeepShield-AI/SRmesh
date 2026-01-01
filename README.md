@@ -15,15 +15,6 @@
 | **Analyzer** | Data analysis component for processing network metrics |
 | **Docker Infrastructure** | Containerized deployment for easy scalability |
 
-## 🗓️ Project Timeline – 2025
-
-| Month (2025)   | Task Description                                 | Status     |
-|----------------|--------------------------------------------------|------------|
-| Mid-August     | Core code implementation                         | ✅ 95% Complete |
-| September      | Frontend development                             | ✅ 90% Complete |
-| October        | Provide necessary utility scripts                | ✅ 90% Complete     |
-| December       | One-click deployment, testing, and optimization  | 🚧 50% Complete     |
-
 ## 🚀 Quick Start
 
 ### Prerequisites
